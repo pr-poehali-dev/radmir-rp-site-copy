@@ -7,6 +7,7 @@ import Icon from '@/components/ui/icon';
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState('home');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const scrollToSection = (id: string) => {
     setActiveSection(id);
@@ -80,12 +81,56 @@ const Index = () => {
                 </button>
               ))}
             </div>
-            <Button className="bg-gradient-to-r from-primary to-secondary hover:opacity-90 transition-opacity">
-              Играть сейчас
-            </Button>
+            <div className="flex items-center gap-4">
+              <Button className="hidden md:block bg-gradient-to-r from-primary to-secondary hover:opacity-90 transition-opacity">
+                Играть сейчас
+              </Button>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="md:hidden"
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              >
+                <Icon name={mobileMenuOpen ? 'X' : 'Menu'} size={24} />
+              </Button>
+            </div>
           </div>
         </div>
       </nav>
+
+      {mobileMenuOpen && (
+        <div className="fixed inset-0 z-40 bg-background/95 backdrop-blur-lg md:hidden animate-fade-in">
+          <div className="container mx-auto px-4 pt-24 pb-8">
+            <div className="flex flex-col gap-6">
+              {['home', 'servers', 'rules', 'donate', 'forum', 'news', 'team', 'contacts'].map((section) => (
+                <button
+                  key={section}
+                  onClick={() => {
+                    scrollToSection(section);
+                    setMobileMenuOpen(false);
+                  }}
+                  className={`text-2xl font-bold text-left transition-colors hover:text-primary ${
+                    activeSection === section ? 'text-primary' : 'text-muted-foreground'
+                  }`}
+                >
+                  {section === 'home' && 'Главная'}
+                  {section === 'servers' && 'Сервера'}
+                  {section === 'rules' && 'Правила'}
+                  {section === 'donate' && 'Донат'}
+                  {section === 'forum' && 'Форум'}
+                  {section === 'news' && 'Новости'}
+                  {section === 'team' && 'Команда'}
+                  {section === 'contacts' && 'Контакты'}
+                </button>
+              ))}
+              <Button className="mt-4 bg-gradient-to-r from-primary to-secondary hover:opacity-90 transition-opacity">
+                <Icon name="Play" size={20} className="mr-2" />
+                Играть сейчас
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <section id="home" className="pt-32 pb-20 px-4">
         <div className="container mx-auto">
