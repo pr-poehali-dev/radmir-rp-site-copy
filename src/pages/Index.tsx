@@ -169,6 +169,41 @@ const Index = () => {
         </div>
       </section>
 
+      <section className="py-20 px-4">
+        <div className="container mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold mb-4">Галерея скриншотов</h2>
+            <p className="text-muted-foreground text-lg">Взгляни на захватывающий мир Radmir RP</p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-6">
+            {[
+              { src: 'https://cdn.poehali.dev/projects/d8f30557-4244-4282-86c2-c0d14ccfd7eb/files/fa233fd5-2352-42b8-9119-309aae6c2fcf.jpg', title: 'Городские улицы' },
+              { src: 'https://cdn.poehali.dev/projects/d8f30557-4244-4282-86c2-c0d14ccfd7eb/files/31438074-0a80-4954-a001-b961d417f3c6.jpg', title: 'Автосалон' },
+              { src: 'https://cdn.poehali.dev/projects/d8f30557-4244-4282-86c2-c0d14ccfd7eb/files/d72a738c-2aef-4fbb-9217-121f1161880d.jpg', title: 'Тусовка' },
+            ].map((image, idx) => (
+              <div
+                key={idx}
+                className="group relative overflow-hidden rounded-2xl border border-border hover:border-primary/50 transition-all cursor-pointer animate-slide-up"
+                style={{ animationDelay: `${idx * 100}ms` }}
+              >
+                <div className="relative aspect-video overflow-hidden">
+                  <img
+                    src={image.src}
+                    alt={image.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                    <h3 className="text-xl font-bold text-foreground mb-2">{image.title}</h3>
+                    <p className="text-sm text-muted-foreground">Нажми, чтобы увеличить</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section id="servers" className="py-20 px-4 bg-muted/50">
         <div className="container mx-auto">
           <div className="text-center mb-12 animate-fade-in">
